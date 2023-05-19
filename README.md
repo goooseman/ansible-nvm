@@ -4,6 +4,8 @@
 
 Install nvm and Node.js.
 
+> This fork uses Rosetta 2 NodeJS installation on Apple Silicon machines.
+
 ## Requirements
 
 git, curl, build-essential, libssl-dev. Requirements are installed by the role.

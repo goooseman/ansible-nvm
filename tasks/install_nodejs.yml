@@ -1,24 +1,46 @@
----
 - name: Install Node.js lts
-  shell: "arch -x86_64 bash -c 'source ./nvm.sh &&  nvm install --lts'"
+  shell: ". ./nvm.sh && nvm install --lts"
   args:
     chdir: "{{ nvm_install_path }}"
   register: nvm_install_result
   changed_when: "'is already installed.' not in nvm_install_result.stderr"
-  when: nvm_node_version == 'lts'
+  when: nvm_node_version == 'lts' && (ansible_os_family != 'Darwin' || ansible_architecture != 'arm64')
 
 - name: Install Node.js latest
-  shell: "arch -x86_64 bash -c 'source ./nvm.sh && nvm install node'"
+  shell: ". ./nvm.sh && nvm install node"
   args:
     chdir: "{{ nvm_install_path }}"
   register: nvm_install_result
   changed_when: "'is already installed.' not in nvm_install_result.stderr"
-  when: nvm_node_version == 'latest'
+  when: nvm_node_version == 'latest' && (ansible_os_family != 'Darwin' || ansible_architecture != 'arm64')
 
 - name: Install Node.js {{ nvm_node_version }}
-  shell: "arch -x86_64 bash -c 'source ./nvm.sh && nvm install {{ nvm_node_version }}'"
+  shell: ". ./nvm.sh && nvm install {{ nvm_node_version }}"
   args:
     chdir: "{{ nvm_install_path }}"
   register: nvm_install_result
   changed_when: "'is already installed.' not in nvm_install_result.stderr"
-  when: nvm_node_version != 'latest' and nvm_node_version != 'lts'
+  when: nvm_node_version != 'latest' and nvm_node_version != 'lts' && (ansible_os_family != 'Darwin' || ansible_architecture != 'arm64')
+
+- name: Install Node.js lts (ARM Mac)
+  shell: "arch -x86_64 bash -c 'source ./nvm.sh;  nvm install --lts'"
+  args:
+    chdir: "{{ nvm_install_path }}"
+  register: nvm_install_result
+  changed_when: "'is already installed.' not in nvm_install_result.stderr"
+  when: nvm_node_version == 'lts' && ansible_os_family == 'Darwin' && ansible_architecture == 'arm64'
+- name: Install Node.js latest (ARM Mac)
+  shell: "arch -x86_64 bash -c 'source ./nvm.sh; nvm install node'"
+  args:
+    chdir: "{{ nvm_install_path }}"
+  register: nvm_install_result
+  changed_when: "'is already installed.' not in nvm_install_result.stderr"
+  when: nvm_node_version == 'latest' && ansible_os_family == 'Darwin' && ansible_architecture == 'arm64'
+
+- name: Install Node.js {{ nvm_node_version }} (ARM Mac)
+  shell: "arch -x86_64 bash -c 'source ./nvm.sh; nvm install {{ nvm_node_version }}'"
+  args:
+    chdir: "{{ nvm_install_path }}"
+  register: nvm_install_result
+  changed_when: "'is already installed.' not in nvm_install_result.stderr"
+  when: nvm_node_version != 'latest' and nvm_node_version != 'lts' && ansible_os_family == 'Darwin' && ansible_architecture == 'arm64'

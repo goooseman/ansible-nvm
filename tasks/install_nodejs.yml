@@ -1,5 +1,5 @@
 - name: Install Node.js lts
-  shell: ". ./nvm.sh && nvm install --lts"
+  shell: ". ./nvm.sh; nvm install --lts"
   args:
     chdir: "{{ nvm_install_path }}"
   register: nvm_install_result
@@ -7,7 +7,7 @@
   when: nvm_node_version == 'lts' and (ansible_os_family != 'Darwin' or ansible_architecture != 'arm64')
 
 - name: Install Node.js latest
-  shell: ". ./nvm.sh && nvm install node"
+  shell: ". ./nvm.sh; nvm install node"
   args:
     chdir: "{{ nvm_install_path }}"
   register: nvm_install_result
@@ -15,7 +15,7 @@
   when: nvm_node_version == 'latest' and (ansible_os_family != 'Darwin' or ansible_architecture != 'arm64')
 
 - name: Install Node.js {{ nvm_node_version }}
-  shell: ". ./nvm.sh && nvm install {{ nvm_node_version }}"
+  shell: ". ./nvm.sh; nvm install {{ nvm_node_version }}"
   args:
     chdir: "{{ nvm_install_path }}"
   register: nvm_install_result

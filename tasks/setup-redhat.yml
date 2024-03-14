@@ -2,11 +2,11 @@
 - name: Install dependencies
   become: true
   become_user: root
-  yum:
+  ansible.builtin.yum:
     name: "{{ packages }}"
   vars:
     packages:
-    - "@Development Tools"
-    - git
-    - curl
-    - openssl-devel
+      - "@Development Tools"
+      - git
+      - curl
+      - openssl-devel

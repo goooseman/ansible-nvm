@@ -1,6 +1,6 @@
 # nvm
 
-[![Ansible Role](https://img.shields.io/ansible/role/15854)](https://galaxy.ansible.com/stephdewit/nvm) [![Ansible Role](https://img.shields.io/ansible/role/d/15854)](https://galaxy.ansible.com/stephdewit/nvm) [![Build Status](https://api.travis-ci.com/repos/stephdewit/ansible-nvm.svg)](https://travis-ci.com/github/stephdewit/ansible-nvm) ![Ansible Quality Score](https://img.shields.io/ansible/quality/15854)
+[![Downloads](https://img.shields.io/ansible/role/d/stephdewit/nvm?label=Downloads)](https://galaxy.ansible.com/stephdewit/nvm) [![Linting Status](https://github.com/stephdewit/ansible-nvm/actions/workflows/lint.yaml/badge.svg)](https://github.com/stephdewit/ansible-nvm/actions/workflows/lint.yaml) [![Test Status](https://github.com/stephdewit/ansible-nvm/actions/workflows/test.yaml/badge.svg)](https://github.com/stephdewit/ansible-nvm/actions/workflows/test.yaml)
 
 Install nvm and Node.js.
 
@@ -12,8 +12,8 @@ git, curl, build-essential, libssl-dev. Requirements are installed by the role.
 
 ## Role Variables
 
-- `nvm_version` nvm version tag, or `HEAD` | `master` | `latest`. Defaults to `0.39.3`
-- `nvm_node_version` Node.js specific version `12.16.0` or use `lts` | `latest`. Defaults to `18.16.0`
+- `nvm_version` nvm version tag, or `HEAD` | `master` | `latest`. Defaults to `0.39.7`
+- `nvm_node_version` Node.js specific version `12.16.0` or use `lts` | `latest`. Defaults to `20.11.0`
 - `nvm_install_path` nvm folder path, support absolute and relative path. Defaults to `~/.nvm`
 - `nvm_shell_init_file` The Shell initialization file to add sourcing of NVM to. Defaults to `~/.profile`
 - `nvm_force_install` **Boolean**. Force reinstall nvm from git, for example if you change some files in `nvm_install_path`. Defaults to `false`

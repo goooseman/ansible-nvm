@@ -1,6 +1,6 @@
 ---
-- name: Check if {{ nvm_node_version }} is the default Node.js version
-  shell: >
+- name: Check if requested version is the default Node.js version
+  ansible.builtin.shell: >
     set -o pipefail && \
     . ./nvm.sh && \
     nvm alias default --no-colors | grep '{{ nvm_node_version }}'
@@ -8,11 +8,13 @@
     executable: /bin/bash
     chdir: "{{ nvm_install_path }}"
   register: nvm_check_default
-  changed_when: False
-  failed_when: False
+  changed_when: false
+  failed_when: false
 
 - name: Set default Node.js version to {{ nvm_node_version }}
-  shell: ". ./nvm.sh; nvm alias default {{ nvm_node_version }}"
+  ansible.builtin.shell: ". ./nvm.sh && nvm alias default {{ nvm_node_version }}"
   args:
     chdir: "{{ nvm_install_path }}"
+  register: nvm_set_default
+  changed_when: nvm_set_default.rc == 0
   when: nvm_check_default.rc != 0

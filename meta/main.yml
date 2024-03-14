@@ -16,7 +16,7 @@ galaxy_info:
     - name: Fedora
       versions:
         - all
-    - name: MacOS
+    - name: macOS
       versions:
         - all
   galaxy_tags:

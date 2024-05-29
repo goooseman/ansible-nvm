@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: nvm
   namespace: goooseman
-  author: Alexander Gusman (based on Stephane de Wit/Jarno Keskikangas work)
+  author: Alexander Gusman (ft Stephane de Wit/Jarno Keskikangas work)
   description: Install nvm and Node.js.
   license: BSD
   min_ansible_version: "2.0"
